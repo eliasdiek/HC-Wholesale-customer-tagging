@@ -1,0 +1,15 @@
+{
+  "name": "hc-tagging",
+  "version": "1.0.0",
+  "description": "Tag HC wholesale customers based on their gift card usage",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Elias Diek",
+  "license": "ISC",
+  "dependencies": {
+    "@shopify/shopify-api": "^5.0.1",
+    "dotenv": "^16.0.2"
+  }
+}
