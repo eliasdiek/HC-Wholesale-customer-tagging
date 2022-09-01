@@ -181,7 +181,7 @@ const searchGiftcardPerCustomer = async (email) => {
     const url = `${baseUrl}/customers/${customerId}.json`
     customerTags.push(tag)
     const newTags = customerTags
-    console.log('[newTags]', newTags)
+    // console.log('[newTags]', newTags)
   
     const response = await fetch(url, {
       method: 'PUT',
@@ -195,7 +195,7 @@ const searchGiftcardPerCustomer = async (email) => {
       })
     })
     const result = await response.json()
-    console.log('[tagCustomer]', result)
+    // console.log('[tagCustomer]', result)
   
     return result
 }
@@ -211,6 +211,16 @@ const handler = async () => {
         const customerGlobalId = customer.id
         const customerId = customerGlobalId.split('/').reverse()[0]
         const customerTags = customer.tags
+        const newTags = [
+          'wholesale-newgiftcard',
+          'wholesale-usedgiftcard',
+          'wholesale-depletedgiftcard'
+        ]
+        for(let k = 0; k < newTags.length; k++) {
+          const index = customerTags.indexOf(newTags[k])
+          if (index > -1) customerTags.splice(index, 1)
+        }
+
         const customerEmail = customer.email
         const giftCards = await searchGiftcardPerCustomer(customerEmail)
         
@@ -228,6 +238,7 @@ const handler = async () => {
         }
       }
   
+      console.log('[All done]')
       return "All done"
     } catch (error) {
       console.log('[error]', error)
